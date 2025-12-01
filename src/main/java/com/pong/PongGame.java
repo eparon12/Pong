@@ -17,7 +17,11 @@ public class PongGame extends JPanel implements MouseMotionListener {
     private Ball ball;
     // step 1 add any other private variables you may need to play the game.
     private Paddle playerPaddle;
-    private 
+    private Speedup speedup;
+    private double ballChangeX = 0.1;
+    private double ballChangeY = 0.3;
+    private double speedchangex = ballChangeX * 2;
+    private double speedchangey = ballChangeY * 2;
 
     public PongGame() {
         aiPaddle = new Paddle(610, 240, 50, 9, Color.WHITE);
@@ -29,8 +33,8 @@ public class PongGame extends JPanel implements MouseMotionListener {
         aiScore.setVisible(true);
         userMouseY = 0;
         addMouseMotionListener(this);
-        ball = new Ball(200, 200, 10, 3, Color.RED, 10);
-
+        ball = new Ball(200, 200, ballChangeX, ballChangeY, Color.RED, 10);
+        speedup = new Speedup(100, 100, 70, 10);
         //create any other objects necessary to play the game.
         playerPaddle = new Paddle(0, 240, 50, 9, Color.GREEN);
 
@@ -54,10 +58,11 @@ public class PongGame extends JPanel implements MouseMotionListener {
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
-        g.setColor(Color.CYAN);
-        g.fillRect(100, 100, 10, 70);
+        
+
         g.setColor(Color.WHITE);
         g.drawString("The Score is User:" + playerScore + " vs Ai:" + aiScore, 240, 20);
+        speedup.draw(g);
         ball.draw(g);
         aiPaddle.draw(g);
         playerPaddle.draw(g);
@@ -71,6 +76,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
     public void gameLogic() {
         //add commands here to make the game play propperly
         int aifuckup = (int)(Math.random() * 10);
+       
         if(aifuckup <= 4 ){
             
         }
@@ -105,12 +111,26 @@ public class PongGame extends JPanel implements MouseMotionListener {
             ball.reverseY();
             long timeNow = System.currentTimeMillis();
             while(timeNow - System.currentTimeMillis() > -1000){
-                System.out.println("waiting");
             }
 
             
             ball.setX(250);
             ball.setY(200);
+            
+        }
+        if(speedup.isTouching(ball)){
+            System.out.println("speeding up");
+            ball.setChangeX(speedchangex);
+            ball.setChangeY(speedchangey);
+        }
+        else if(!speedup.isTouching(ball)){
+            if (ball.getChangeX() != ballChangeX && ball.getChangeY() != ballChangeY){
+                ball.setChangeX(ballChangeX);
+                ball.setChangeY(ballChangeY);
+            }
+            else{
+                ball.moveBall();
+            }
             
         }
 

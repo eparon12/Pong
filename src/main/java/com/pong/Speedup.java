@@ -8,7 +8,7 @@ public class Speedup {
 	private int y;
 	private int height;
 	private int width;
-	private Color color = Color.GREEN;
+	private Color color = Color.CYAN;
 	
 	
 	

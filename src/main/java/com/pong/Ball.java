@@ -11,7 +11,7 @@ private double changeY;
 private int size;
 private Color color; 
 
-public Ball(int x, int y, int changeX, int changeY, Color color, int size) {
+public Ball(int x, int y, double changeX, double changeY, Color color, int size) {
         this.x = x;
         this.y = y;
         this.changeX = changeX;
@@ -107,7 +107,7 @@ public void setChangeX(double x) {
 }
 //precondition: y is a non-null number, and when increasing or decreasing the changey don't change by a whole number. Use smaller decimals 
 //postcondition: sets the changeY of the ball equal to the inputed y
-public void setChangey(double y) {
+public void setChangeY(double y) {
 	this.changeY=x;
 }
   
