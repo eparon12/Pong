@@ -40,6 +40,7 @@ public Ball(int x, int y, double changeX, double changeY, Color color, int size)
  //postcondition: changes the y direction of the ball
    public void reverseY(){
     changeY*=-1;
+    System.out.println("c");
    }
    
    //precondition: none
